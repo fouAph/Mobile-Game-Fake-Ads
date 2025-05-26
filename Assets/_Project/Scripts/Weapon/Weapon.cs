@@ -4,12 +4,15 @@ public class Weapon : MonoBehaviour, IWeapon
 {
     [SerializeField] Transform bulletSpawnPoint;
     [SerializeField] Bullet bulletPrefab;
+    [SerializeField] AudioClip shootSFX;
 
     [SerializeField] int damage = 10;
     [SerializeField] float fireRate = .5f;
     public void Attack()
     {
-        Bullet b = BulletPoolManager.Instance.SpawnBulletFromPool(bulletPrefab.name);
+        Bullet b = BulletPoolManager.Instance.SpawnFromPool(bulletPrefab.name);
+        if (SoundEffectPoolManager.Instance)
+            SoundEffectPoolManager.Instance.PlayAudioToPosition(shootSFX.name, bulletSpawnPoint.position);
         b.OnBulletSpawn(this, bulletSpawnPoint.position);
         b.OnBulletLaunch(Vector3.forward);
     }

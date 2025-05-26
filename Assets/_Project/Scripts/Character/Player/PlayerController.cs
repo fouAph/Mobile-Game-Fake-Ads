@@ -18,12 +18,14 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-
+    bool canShoot;
     // Update is called once per frame
     void Update()
     {
         //if (inputController.IsAttacking)
-        if (weaponController.CheckCanShoot())
+        if (weaponController.CheckCanShoot()
+            && inputController.IsAttacking
+         )
             //{
             weaponController.UseWeapon();
         //}
