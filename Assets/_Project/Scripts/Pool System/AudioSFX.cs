@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AudioSFX : MonoBehaviour
+public class AudioFX : MonoBehaviour
 {
     public AudioSource audioSource;
     [Range(0f, 1f)]

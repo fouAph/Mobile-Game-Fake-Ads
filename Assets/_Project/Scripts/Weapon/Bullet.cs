@@ -45,6 +45,8 @@ public class Bullet : MonoBehaviour, IBullet
         if (other.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.OnDamage(weapon.GetDamage());
+            if (VFXPoolManager.Instance)
+                VFXPoolManager.Instance.PlayVFXAtPosition("BloodVFX", transform.position);
             OnBulletDestroy();
         }
     }

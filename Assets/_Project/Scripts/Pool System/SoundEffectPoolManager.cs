@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundEffectPoolManager : GenericPoolManager<AudioSFX>
+public class SoundEffectPoolManager : GenericPoolManager<AudioFX>
 {
     public static SoundEffectPoolManager Instance;
     public SFX[] SFXList;
@@ -36,8 +36,5 @@ public class SoundEffectPoolManager : GenericPoolManager<AudioSFX>
         public string sfxName;
         public AudioClip sfxClip;
     }
-
-
-
 }
 
