@@ -791,6 +791,7 @@ GameObject:
   - component: {fileID: 774417169}
   - component: {fileID: 774417168}
   - component: {fileID: 774417170}
+  - component: {fileID: 774417171}
   m_Layer: 0
   m_Name: PoolSystemCollection
   m_TagString: Untagged
@@ -854,6 +855,22 @@ MonoBehaviour:
     sfxClip: {fileID: 8300000, guid: 0d69be5e1e9df714ba62e1f329946ee4, type: 3}
   - sfxName: 
     sfxClip: {fileID: 8300000, guid: 028321d5be4c84a4dabbe2f347a4bcf9, type: 3}
+--- !u!114 &774417171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774417167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe20cc026ee5b7c48b3b72ab8bc04eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolItems:
+  - objectName: 
+    prefab: {fileID: 2604177570745211392, guid: c32cc696dcf0d594eb6fdf0ea130edaa, type: 3}
+    poolSize: 100
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
