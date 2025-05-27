@@ -3,11 +3,11 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public IWeapon CurrentWeapon => CurrentWeapon;
-    public float FireSpeed => fireRate;
-    public int Damage => damage;
+    // public float FireSpeed => fireRate;
+    // public int Damage => damage;
 
-    [SerializeField] int damage = 10;
-    [SerializeField] float fireRate = .5f;
+    // [SerializeField] int damage = 10;
+    // [SerializeField] float fireRate = .5f;
     [SerializeField] IWeapon currentWeapon;
 
     private float lastFired;
@@ -22,8 +22,8 @@ public class WeaponController : MonoBehaviour
     public void EquipWeapon(IWeapon weapon)
     {
         currentWeapon = weapon;
-        damage = weapon.GetDamage();
-        fireRate = weapon.GetFireRate();
+        // damage = weapon.GetDamage();
+        // fireRate = weapon.GetFireRate();
     }
 
     public void UseWeapon()
@@ -35,7 +35,6 @@ public class WeaponController : MonoBehaviour
 
     public bool CheckCanShoot()
     {
-        float secondsPerShot = 1f / fireRate;
-        return Time.time - lastFired >= secondsPerShot;
+        return currentWeapon.CheckCanShoot(lastFired);
     }
 }

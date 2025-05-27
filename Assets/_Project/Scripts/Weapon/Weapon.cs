@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] AudioClip shootSFX;
 
     [SerializeField] int damage = 10;
+    [SerializeField] float bulletSpeed = 5f;
     [SerializeField] float fireRate = .5f;
     public void Attack()
     {
@@ -14,11 +15,17 @@ public class Weapon : MonoBehaviour, IWeapon
         if (SoundEffectPoolManager.Instance)
             SoundEffectPoolManager.Instance.PlayAudioToPosition(shootSFX.name, bulletSpawnPoint.position);
         b.OnBulletSpawn(this, bulletSpawnPoint.position);
-        b.OnBulletLaunch(Vector3.forward);
+        b.OnBulletLaunch(bulletSpeed, Vector3.forward);
     }
 
     public int GetDamage() => damage;
     public float GetFireRate() => fireRate;
+
+    public bool CheckCanShoot(float lastFired)
+    {
+        float secondsPerShot = 1f / fireRate;
+        return Time.time - lastFired >= secondsPerShot;
+    }
 }
 
 public interface IWeapon
@@ -26,4 +33,5 @@ public interface IWeapon
     void Attack();
     int GetDamage();
     float GetFireRate();
+    bool CheckCanShoot(float lastFired);
 }

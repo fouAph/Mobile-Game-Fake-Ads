@@ -4,7 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, IBullet
 {
     [SerializeField] float maxBulletDistance = 20f;
-    [SerializeField] float bulletSpeed = 5f;
+    // [SerializeField] float bulletSpeed = 5f;
     [SerializeField] Weapon weapon;
     private Vector3 initialPos;
 
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour, IBullet
         gameObject.SetActive(true);
     }
 
-    public void OnBulletLaunch(Vector3 direction)
+    public void OnBulletLaunch(float bulletSpeed, Vector3 direction)
     {
         StartCoroutine(LaunchBulletCor());
         IEnumerator LaunchBulletCor()
@@ -55,6 +55,6 @@ public class Bullet : MonoBehaviour, IBullet
 public interface IBullet
 {
     void OnBulletSpawn(Weapon _weapon, Vector3 spawnPos);
-    void OnBulletLaunch(Vector3 direction);
+    void OnBulletLaunch(float bulletSpeed, Vector3 direction);
     void OnBulletDestroy();
 }
