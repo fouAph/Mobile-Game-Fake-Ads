@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         Bullet b = BulletPoolManager.Instance.SpawnFromPool(bulletPrefab.name);
         if (SoundEffectPoolManager.Instance)
-            SoundEffectPoolManager.Instance.PlayAudioToPosition(shootSFX.name, bulletSpawnPoint.position);
+            SoundEffectPoolManager.Instance.PlayAudioAtPosition(shootSFX.name, bulletSpawnPoint.position);
         b.OnBulletSpawn(this, bulletSpawnPoint.position);
         b.OnBulletLaunch(bulletSpeed, Vector3.forward);
     }

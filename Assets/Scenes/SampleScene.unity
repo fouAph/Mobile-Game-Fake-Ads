@@ -297,8 +297,10 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 742962830}
   bulletPrefab: {fileID: 6811167772561253102, guid: 82c6297a230859d4197c4624ad240fe0, type: 3}
   shootSFX: {fileID: 8300000, guid: 0d69be5e1e9df714ba62e1f329946ee4, type: 3}
-  damage: 10
-  fireRate: 20
+  damage: 110
+  bulletSpeed: 30
+  fireRate: 3
+  knockBackForce: 2500
 --- !u!114 &281972017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,8 +325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91218c96fdf3774dbb2631a08354460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  fireRate: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +792,7 @@ GameObject:
   - component: {fileID: 774417168}
   - component: {fileID: 774417170}
   - component: {fileID: 774417171}
+  - component: {fileID: 774417172}
   m_Layer: 0
   m_Name: PoolSystemCollection
   m_TagString: Untagged
@@ -848,13 +849,24 @@ MonoBehaviour:
     poolSize: 100
   SFXList:
   - sfxName: 
-    sfxClip: {fileID: 8300000, guid: cc8b3cb2ec40e584f860abdfa06af999, type: 3}
+    sfxClip:
+    - {fileID: 8300000, guid: 30f6f0d9121362642ade1463ad9e5dbf, type: 3}
   - sfxName: 
-    sfxClip: {fileID: 8300000, guid: 30f6f0d9121362642ade1463ad9e5dbf, type: 3}
+    sfxClip:
+    - {fileID: 8300000, guid: cc8b3cb2ec40e584f860abdfa06af999, type: 3}
   - sfxName: 
-    sfxClip: {fileID: 8300000, guid: 0d69be5e1e9df714ba62e1f329946ee4, type: 3}
+    sfxClip:
+    - {fileID: 8300000, guid: 0d69be5e1e9df714ba62e1f329946ee4, type: 3}
   - sfxName: 
-    sfxClip: {fileID: 8300000, guid: 028321d5be4c84a4dabbe2f347a4bcf9, type: 3}
+    sfxClip:
+    - {fileID: 8300000, guid: 028321d5be4c84a4dabbe2f347a4bcf9, type: 3}
+  - sfxName: FleshHit
+    sfxClip:
+    - {fileID: 8300000, guid: 14adc7fbf27bb4b1c928053c1060edff, type: 3}
+    - {fileID: 8300000, guid: 16fda385ab14d48afb14d17af8326dd2, type: 3}
+    - {fileID: 8300000, guid: 3778450c5cc294c7cb8ec3885e111d00, type: 3}
+    - {fileID: 8300000, guid: 7b8f7cd6c1ac44425bef51e36781b251, type: 3}
+    - {fileID: 8300000, guid: a876179e000ff4ff09b30761b1a88595, type: 3}
 --- !u!114 &774417171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,6 +883,22 @@ MonoBehaviour:
   - objectName: 
     prefab: {fileID: 2604177570745211392, guid: c32cc696dcf0d594eb6fdf0ea130edaa, type: 3}
     poolSize: 100
+--- !u!114 &774417172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774417167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ee04c6dcd8dd1418dd28cbade12be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolItems:
+  - objectName: 
+    prefab: {fileID: 234294766249750165, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+    poolSize: 5
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1192,71 @@ PrefabInstance:
       addedObject: {fileID: 742962830}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e00b27b8d9c47264ab84203ddf941b2c, type: 3}
+--- !u!1001 &1149338275
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 419248705073074959, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2972
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.713
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335175292345948051, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946926889738820554, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_Name
+      value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946926889738820554, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb5cbc265915eef4cab170f690282d0d, type: 3}
 --- !u!1 &1377974034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,3 +1428,4 @@ SceneRoots:
   - {fileID: 281972015}
   - {fileID: 715818656}
   - {fileID: 774417169}
+  - {fileID: 1149338275}

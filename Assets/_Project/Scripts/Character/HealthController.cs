@@ -19,7 +19,7 @@ public class HealthController : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        ResetHealth(); 
     }
 
     public void OnDamage(int damage)
@@ -41,6 +41,12 @@ public class HealthController : MonoBehaviour, IDamageable
             gameObject.SetActive(false);
 
         OnDieEvent?.Invoke();
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        isDie = false; 
     }
 }
 

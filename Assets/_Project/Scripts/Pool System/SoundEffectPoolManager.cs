@@ -27,7 +27,7 @@ public class SoundEffectPoolManager : GenericPoolManager<AudioFX>
         }
     }
 
-    public void PlayAudioToPosition(string sfxName, Vector3 position)
+    public void PlayAudioAtPosition(string sfxName, Vector3 position)
     {
         var sfx = SpawnFromPool(poolItems[0].prefab.name);      // take the first prefab since its the only SFX prefab that we need 
         sfx.transform.position = position;

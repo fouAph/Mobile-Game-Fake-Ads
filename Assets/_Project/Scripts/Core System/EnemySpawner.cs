@@ -11,7 +11,10 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Time.time - lastSpawn / 1 > spawnRate)
         {
-            Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], GetRandomPositionFromBoxCollider(), Quaternion.identity);
+            // Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], GetRandomPositionFromBoxCollider(), Quaternion.identity);
+
+            EnemyPoolSystem.Instance.SpawnEnemyAtPosition("Zombie", GetRandomPositionFromBoxCollider());
+
             lastSpawn = Time.time;
 
         }

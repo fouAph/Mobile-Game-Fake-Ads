@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour, IBullet
             if (VFXPoolManager.Instance)
             {
                 VFXPoolManager.Instance.PlayVFXAtPosition("BloodVFX", transform.position);
-                SoundEffectPoolManager.Instance.PlayAudioToPosition("FleshHit", transform.position);
+                SoundEffectPoolManager.Instance.PlayAudioAtPosition("FleshHit", transform.position);
 
             }
             if (enemy.IsDie)

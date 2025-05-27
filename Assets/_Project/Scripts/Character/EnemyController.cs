@@ -37,15 +37,17 @@ public class EnemyController : MonoBehaviour
 
     private void ToggleRagdoll(bool isActive)
     {
-        foreach (var item in childColliders)
-        {
-            item.isTrigger = !isActive;
-        }
+        if (childColliders.Length > 0)
+            foreach (var item in childColliders)
+            {
+                item.isTrigger = !isActive;
+            }
 
-        foreach (var item in childRigidbodies)
-        {
-            item.isKinematic = !isActive;
-        }
+        if (childRigidbodies.Length > 0)
+            foreach (var item in childRigidbodies)
+            {
+                item.isKinematic = !isActive;
+            }
     }
 
     private void Update()
@@ -83,5 +85,20 @@ public class EnemyController : MonoBehaviour
             rb.isKinematic = false;
             col.enabled = false;
         }
+    }
+
+    public void OnEnemySpawn()
+    {
+        gameObject.SetActive(true);
+        this.enabled = true;
+        healthController.ResetHealth();
+        
+        if (rb)
+            rb.isKinematic = false;
+        if (col)
+            col.enabled = true;
+        if (animator)
+            animator.enabled = true;
+
     }
 }
