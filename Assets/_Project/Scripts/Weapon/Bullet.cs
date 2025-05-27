@@ -42,6 +42,9 @@ public class Bullet : MonoBehaviour, IBullet
 
     private void OnTriggerEnter(Collider other)
     {
+        other.TryGetComponent<EnemyController>(out var enemy);
+        if (enemy == false) return;
+        if (enemy.IsDie == true) return;
         if (other.TryGetComponent<IDamageable>(out var damageable))
         {
 
@@ -52,13 +55,8 @@ public class Bullet : MonoBehaviour, IBullet
                 SoundEffectPoolManager.Instance.PlayAudioToPosition("FleshHit", transform.position);
 
             }
-            if (other.TryGetComponent<EnemyController>(out var enemy))
-            {
-                if (enemy.IsDie)
-                {
-                    enemy.PushBackWhenDie(weapon.GetBulletSpeed() * 50);
-                }
-            }
+            if (enemy.IsDie)
+                enemy.PushBackWhenDie(weapon.GetKnockBackForce());
             OnBulletDestroy();
         }
     }

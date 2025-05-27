@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBulletDistance: 20
-  bulletSpeed: 10
   weapon: {fileID: 0}
 --- !u!135 &404670439625859049
 SphereCollider:
@@ -185,7 +184,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.02
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8075105115620675980
 PrefabInstance:

@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -9,33 +9,43 @@ public class EnemyController : MonoBehaviour
     [SerializeField] HealthController healthController;
     [SerializeField] Animator animator;
 
-    Collider[] colliders;
-    Rigidbody[] rigidbodies;
+    private Rigidbody rb;
+    private Collider col;
 
-    void Start()
+    private Collider[] childColliders;
+    private Rigidbody[] childRigidbodies;
+    private void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
+
         healthController = GetComponent<HealthController>();
         healthController.OnDieEvent.AddListener(OnDieEvent);
-        colliders = GetComponentsInChildren<Collider>();
-        rigidbodies = GetComponentsInChildren<Rigidbody>();
+        childColliders = GetComponentsInChildren<Collider>();
+        childRigidbodies = GetComponentsInChildren<Rigidbody>();
+
+        var allColliders = GetComponentsInChildren<Collider>();
+        var allRigidbodies = GetComponentsInChildren<Rigidbody>();
+
+        // Filter to exclude components on this GameObject
+        childColliders = allColliders.Where(c => c != col).ToArray();
+        childRigidbodies = allRigidbodies.Where(r => r != rb).ToArray();
 
         ToggleRagdoll(false);
+
     }
 
     private void ToggleRagdoll(bool isActive)
     {
-        foreach (var item in colliders)
+        foreach (var item in childColliders)
         {
             item.isTrigger = !isActive;
         }
 
-        foreach (var item in rigidbodies)
+        foreach (var item in childRigidbodies)
         {
             item.isKinematic = !isActive;
         }
-
-        colliders[0].isTrigger = false;
-        rigidbodies[0].isKinematic = false;
     }
 
     private void Update()
@@ -57,12 +67,21 @@ public class EnemyController : MonoBehaviour
 
     public void PushBackWhenDie(float force)
     {
-        foreach (var item in rigidbodies)
+        foreach (var item in childRigidbodies)
         {
             if (Random.Range(0f, 1f) < 0.5f) // 50% chance to apply force
             {
                 item.AddForce(Vector3.forward * force, ForceMode.Force);
             }
+        }
+
+        StartCoroutine(DisableRagdollCor());
+        IEnumerator DisableRagdollCor()
+        {
+            yield return new WaitForSeconds(3);
+            ToggleRagdoll(false);
+            rb.isKinematic = false;
+            col.enabled = false;
         }
     }
 }

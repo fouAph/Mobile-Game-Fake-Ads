@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] int damage = 10;
     [SerializeField] float bulletSpeed = 5f;
     [SerializeField] float fireRate = .5f;
+    [SerializeField] float knockBackForce = 2500;
     public void Attack()
     {
         Bullet b = BulletPoolManager.Instance.SpawnFromPool(bulletPrefab.name);
@@ -27,9 +28,7 @@ public class Weapon : MonoBehaviour, IWeapon
     public int GetDamage() => damage;
     public float GetFireRate() => fireRate;
     public float GetBulletSpeed() => bulletSpeed;
-
-
-
+    public float GetKnockBackForce() => knockBackForce;
 }
 
 public interface IWeapon
@@ -39,4 +38,5 @@ public interface IWeapon
     int GetDamage();
     float GetFireRate();
     float GetBulletSpeed();
+    float GetKnockBackForce();
 }
