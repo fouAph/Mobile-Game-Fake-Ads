@@ -8,9 +8,9 @@ public class AudioFX : MonoBehaviour
     public float pitch;
     public bool isLooping;
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip[] clip)
     {
-        audioSource.PlayOneShot(clip, volume);
+        audioSource.PlayOneShot(clip[Random.Range(0,clip.Length)], volume);
     }
 }
 

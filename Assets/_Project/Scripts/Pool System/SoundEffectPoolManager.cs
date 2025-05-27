@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SoundEffectPoolManager : GenericPoolManager<AudioFX>
 {
     public static SoundEffectPoolManager Instance;
     public SFX[] SFXList;
-    public Dictionary<string, AudioClip> SFXDictionary = new();
+    public Dictionary<string, AudioClip[]> SFXDictionary = new();
     protected override void Awake()
     {
         Instance = this;
@@ -18,7 +19,10 @@ public class SoundEffectPoolManager : GenericPoolManager<AudioFX>
     {
         foreach (var item in SFXList)
         {
-            item.sfxName = item.sfxClip.name;
+            if (item.sfxName == "")
+            {
+                item.sfxName = item.sfxClip[0].name;
+            }
             SFXDictionary.Add(item.sfxName, item.sfxClip);
         }
     }
@@ -34,7 +38,7 @@ public class SoundEffectPoolManager : GenericPoolManager<AudioFX>
     public class SFX
     {
         public string sfxName;
-        public AudioClip sfxClip;
+        public AudioClip[] sfxClip;
     }
 }
 

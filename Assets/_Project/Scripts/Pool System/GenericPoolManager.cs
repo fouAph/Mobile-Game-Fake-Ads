@@ -17,7 +17,8 @@ public abstract class GenericPoolManager<T> : MonoBehaviour where T : MonoBehavi
         foreach (var item in poolItems)
         {
             AddObjectsToPool(item.prefab, item.poolSize);
-            item.objectName = item.prefab.name;
+            if (item.objectName == "")
+                item.objectName = item.prefab.name;
         }
     }
 
