@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HealthController : MonoBehaviour, IDamageable
 {
@@ -9,6 +10,9 @@ public class HealthController : MonoBehaviour, IDamageable
 
     [SerializeField] int maxHealth = 100;
     [SerializeField] int currentHealth;
+
+    [HideInInspector]
+    public UnityEvent OnDieEvent = new();
 
 
     private bool isDie;
@@ -21,7 +25,8 @@ public class HealthController : MonoBehaviour, IDamageable
     public void OnDamage(int damage)
     {
         if (isDie) return;
-        currentHealth = Math.Clamp(currentHealth, 0, currentHealth - damage);
+        currentHealth = Math.Clamp(currentHealth - damage, 0, maxHealth);
+
 
         if (currentHealth <= 0)
         {
@@ -34,6 +39,8 @@ public class HealthController : MonoBehaviour, IDamageable
     {
         if (hideWhenDie)
             gameObject.SetActive(false);
+
+        OnDieEvent?.Invoke();
     }
 }
 

@@ -44,11 +44,20 @@ public class Bullet : MonoBehaviour, IBullet
     {
         if (other.TryGetComponent<IDamageable>(out var damageable))
         {
+
             damageable.OnDamage(weapon.GetDamage());
             if (VFXPoolManager.Instance)
             {
                 VFXPoolManager.Instance.PlayVFXAtPosition("BloodVFX", transform.position);
                 SoundEffectPoolManager.Instance.PlayAudioToPosition("FleshHit", transform.position);
+
+            }
+            if (other.TryGetComponent<EnemyController>(out var enemy))
+            {
+                if (enemy.IsDie)
+                {
+                    enemy.PushBackWhenDie(weapon.GetBulletSpeed() * 50);
+                }
             }
             OnBulletDestroy();
         }

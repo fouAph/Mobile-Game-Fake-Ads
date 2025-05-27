@@ -18,20 +18,25 @@ public class Weapon : MonoBehaviour, IWeapon
         b.OnBulletLaunch(bulletSpeed, Vector3.forward);
     }
 
-    public int GetDamage() => damage;
-    public float GetFireRate() => fireRate;
-
     public bool CheckCanShoot(float lastFired)
     {
         float secondsPerShot = 1f / fireRate;
         return Time.time - lastFired >= secondsPerShot;
     }
+
+    public int GetDamage() => damage;
+    public float GetFireRate() => fireRate;
+    public float GetBulletSpeed() => bulletSpeed;
+
+
+
 }
 
 public interface IWeapon
 {
+    bool CheckCanShoot(float lastFired);
     void Attack();
     int GetDamage();
     float GetFireRate();
-    bool CheckCanShoot(float lastFired);
+    float GetBulletSpeed();
 }
