@@ -298,8 +298,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6811167772561253102, guid: 82c6297a230859d4197c4624ad240fe0, type: 3}
   shootSFX: {fileID: 8300000, guid: 0d69be5e1e9df714ba62e1f329946ee4, type: 3}
   damage: 110
-  bulletSpeed: 30
   fireRate: 3
+  bulletCountPerShoot: 3
+  bulletSpeed: 30
   knockBackForce: 2500
 --- !u!114 &281972017
 MonoBehaviour:
