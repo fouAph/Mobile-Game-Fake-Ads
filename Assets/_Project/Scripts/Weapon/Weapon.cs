@@ -69,8 +69,6 @@ public class Weapon : MonoBehaviour, IWeapon
         b.OnBulletLaunch(bulletSpeed, direction);
     }
 
-
-
     public bool CheckCanShoot(float lastFired)
     {
         float secondsPerShot = 1f / fireRate;
