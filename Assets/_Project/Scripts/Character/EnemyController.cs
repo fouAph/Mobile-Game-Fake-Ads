@@ -31,6 +31,8 @@ public class EnemyController : MonoBehaviour
         childColliders = allColliders.Where(c => c != col).ToArray();
         childRigidbodies = allRigidbodies.Where(r => r != rb).ToArray();
 
+        if (GameManager.Instance)
+            healthController.OnDieEvent.AddListener(GameManager.Instance.OnEnemyDie);
         ToggleRagdoll(false);
 
     }
@@ -92,7 +94,7 @@ public class EnemyController : MonoBehaviour
         gameObject.SetActive(true);
         this.enabled = true;
         healthController.ResetHealth();
-        
+
         if (rb)
             rb.isKinematic = false;
         if (col)
