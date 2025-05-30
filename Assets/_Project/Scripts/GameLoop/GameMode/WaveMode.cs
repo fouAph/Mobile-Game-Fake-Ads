@@ -10,7 +10,7 @@ public class WaveMode : GameModeBase
 
     [ReadOnly] int currentWaveCount;
     [ReadOnly] int currentEnemyLeft;
-    [ReadOnly] int aliveEnemyCount;
+    [ReadOnly] int enemyAliveCount;
     private float lastSpawn;
     public override void StartGame()
     {
@@ -23,9 +23,15 @@ public class WaveMode : GameModeBase
     {
         if (isGameStarted == false) return;
         if (currentEnemyLeft == 0) return;
+        SpawnEnemy();
+    }
+
+    private void SpawnEnemy()
+    {
         if (Time.time - lastSpawn / 1 > spawnRate)
         {
             // Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], GetRandomPositionFromBoxCollider(), Quaternion.identity);
+            enemyAliveCount++;
 
             GameManager.Instance.SpawnEnemy("Zombie");
 
@@ -43,9 +49,9 @@ public class WaveMode : GameModeBase
     public override void OnEnemyDie()
     {
         GameManager.Instance.AddCredit(waveSettings[currentWaveCount].creditWhenKillingEnemy);
-        aliveEnemyCount--;
+        enemyAliveCount--;
 
-        if (aliveEnemyCount == 0)
+        if (enemyAliveCount == 0)
         {
             StartCoroutine(NextWave());
         }
@@ -53,14 +59,20 @@ public class WaveMode : GameModeBase
 
     public IEnumerator NextWave()
     {
-        if (currentWaveCount == waveSettings.Length)
+        if (currentWaveCount < waveSettings.Length - 1)
         {
-            yield break;
-        }
-        currentWaveCount++;
 
-        currentEnemyLeft = waveSettings[currentWaveCount].maxEnemy;
-        isGameStarted = true;
+            print("New Wave is Coming");
+            yield return new WaitForSeconds(1f);
+            currentWaveCount++;
+
+            currentEnemyLeft = waveSettings[currentWaveCount].maxEnemy;
+            isGameStarted = true;
+        }
+        else
+        {
+            EndGame();
+        }
     }
 
     [Serializable]
